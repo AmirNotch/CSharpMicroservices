@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Basket.API.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace Basket.API;
 
@@ -18,6 +19,8 @@ public class Startup
         {
             opt.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
         });
+
+        services.AddScoped<IBasketRepository, BasketRepository>();
         
         services.AddControllers();
         services.AddSwaggerGen(c =>
