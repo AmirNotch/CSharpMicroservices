@@ -1,4 +1,4 @@
-namespace Catalog.API;
+namespace Basket.API;
 
 public class Program
 {
@@ -12,3 +12,4 @@ public class Program
             // .UseSerilog(SeriLogger.Configure)
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 }
+
