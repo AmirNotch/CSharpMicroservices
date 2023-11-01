@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Discount.API.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace Discount.API;
 
@@ -14,6 +15,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<IDiscountRepository, DiscountRepository>();
+
         services.AddControllers();
         services.AddSwaggerGen(c =>
         {
