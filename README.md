@@ -46,35 +46,41 @@ Catalog микросервисов, который включает:
 - Публикация события BasketCheckout из микросервиса корзины и подписка на это событие из микросервиса заказа
 
 Ordering микросервис:
-Реализация DDD, CQRS и Clean Architecture с использованием лучших практик
-Разработка CQRS с использованием пакетов MediatR, FluentValidation и AutoMapper
-Получение сообщений очереди BasketCheckout из RabbitMQ с использованием конфигурации MassTransit-RabbitMQ
-Подключение к базе данных SqlServer и ее контейнеризация
-Использование ORM Entity Framework Core и автоматическое мигрирование на SqlServer при запуске приложения
+
+- Реализация DDD, CQRS и Clean Architecture с использованием лучших практик
+- Разработка CQRS с использованием пакетов MediatR, FluentValidation и AutoMapper
+- Получение сообщений очереди BasketCheckout из RabbitMQ с использованием конфигурации MassTransit-RabbitMQ
+- Подключение к базе данных SqlServer и ее контейнеризация
+- Использование ORM Entity Framework Core и автоматическое мигрирование на SqlServer при запуске приложения
 
 Микросервис API Gateway Ocelot:
-Реализация API Gateway с использованием Ocelot
-Образцы микросервисов и контейнеров для перенаправления через API Gateway
-Запуск разных типов контейнеров API Gateway/BFF
-Шаблон агрегации Gateway в Shopping.Aggregator
+
+- Реализация API Gateway с использованием Ocelot
+- Образцы микросервисов и контейнеров для перенаправления через API Gateway
+- Запуск разных типов контейнеров API Gateway/BFF
+- Шаблон агрегации Gateway в Shopping.Aggregator
 
 Микросервис веб-приложения ShoppingApp:
-ASP.NET Core веб-приложение с Bootstrap 4 и шаблоном Razor
-Вызов API с помощью HttpClientFactory и Polly
+
+- ASP.NET Core веб-приложение с Bootstrap 4 и шаблоном Razor
+- Вызов API с помощью HttpClientFactory и Polly
 
 Пересекающиеся реализации микросервисов:
-Централизованное распределенное логирование с использованием Elastic Stack (ELK): Elasticsearch, Logstash, Kibana и SeriLog для микросервисов
-Использование функции HealthChecks в бэк-энд микросервисах ASP.NET
-Использование службы Watchdog в отдельном сервисе, который может следить за состоянием и нагрузкой микросервисов и предоставлять информацию о состоянии микросервисов, запросив HealthChecks
+
+- Централизованное распределенное логирование с использованием Elastic Stack (ELK): Elasticsearch, Logstash, Kibana и SeriLog для микросервисов
+- Использование функции HealthChecks в бэк-энд микросервисах ASP.NET
+- Использование службы Watchdog в отдельном сервисе, который может следить за состоянием и нагрузкой микросервисов и предоставлять информацию о состоянии микросервисов, запросив HealthChecks
 
 Реализация устойчивости микросервисов:
-Использование IHttpClientFactory для реализации устойчивых HTTP-запросов
-Реализация шаблонов Retry и Circuit Breaker с экспоненциальной задержкой с использованием IHttpClientFactory и политик Polly
+
+- Использование IHttpClientFactory для реализации устойчивых HTTP-запросов
+- Реализация шаблонов Retry и Circuit Breaker с экспоненциальной задержкой с использованием IHttpClientFactory и политик Polly
 
 Вспомогательные контейнеры-Docker:
-Использование Portainer для управления контейнерами с удобным интерфейсом
-Использование pgAdmin PostgreSQL Tools для администрирования и разработки PostgreSQL
-Настройка Docker Compose со всеми микросервисами в Docker, включая контейнеризацию микросервисов и баз данных, а также переопределение переменных среды.
+
+- Использование Portainer для управления контейнерами с удобным интерфейсом
+- Использование pgAdmin PostgreSQL Tools для администрирования и разработки PostgreSQL
+- Настройка Docker Compose со всеми микросервисами в Docker, включая контейнеризацию микросервисов и баз данных, а также переопределение переменных среды.
 
 ![image](https://github.com/AmirNotch/CSharpMicroservices/assets/69799846/976e5eca-f818-4c8f-81c5-e20fc9528f7d)
 
