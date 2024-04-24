@@ -1,4 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
+using Ordering.Application;
+using Ordering.Infrastructure;
 
 namespace Ordering.API;
 
@@ -14,17 +16,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        //services.AddStackExchangeRedisCache(opt =>
-        //{
-        //    opt.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
-        //});
-
-        //services.AddScoped<IBasketRepository, BasketRepository>();
-
-        //services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
-        //    (o => o.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
-
-        //services.AddScoped<DiscountGrpcService>();
+        services.AddApplicationServices();
+        services.AddInfrastructureServices(Configuration);
 
         services.AddControllers();
         services.AddSwaggerGen(c =>
