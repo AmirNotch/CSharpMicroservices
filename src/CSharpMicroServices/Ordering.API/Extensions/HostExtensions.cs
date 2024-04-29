@@ -21,6 +21,7 @@ public static class HostExtensions
             {
                 logger.LogInformation("Seed database associated with context {DbContextName}", typeof(TContext).Name);
 
+                InvokeSeeder(seeder, context, services);
                 
                 logger.LogInformation("Seed database associated with context {DbContextName}", typeof(TContext).Name);
             }
