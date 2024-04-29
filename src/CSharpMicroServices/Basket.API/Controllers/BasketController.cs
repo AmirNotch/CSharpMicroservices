@@ -1,7 +1,10 @@
 ﻿using System.Net;
+using AutoMapper;
 using Basket.API.Entities;
 using Basket.API.GrpcServices;
 using Basket.API.Repositories;
+using EventBus.Messages.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
@@ -12,11 +15,15 @@ public class BasketController : Controller
 {
     private readonly IBasketRepository _basketRepositor;
     private readonly DiscountGrpcService _discountGrpcService;
+    private readonly IMapper _mapper;
+    private readonly IPublishEndpoint _publishEndpoint;
     
-    public BasketController(IBasketRepository basketRepositor, DiscountGrpcService discountGrpcService)
+    public BasketController(IBasketRepository basketRepositor, DiscountGrpcService discountGrpcService, IMapper mapper, IPublishEndpoint publishEndpoint)
     {
         _basketRepositor = basketRepositor ?? throw new ArgumentNullException(nameof(basketRepositor));
         _discountGrpcService = discountGrpcService ?? throw new ArgumentNullException(nameof(discountGrpcService));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
     }
 
     [HttpGet("{userName}", Name = "GetBasket")]
@@ -46,5 +53,24 @@ public class BasketController : Controller
     {
         await _basketRepositor.DeleteBasket(userName);
         return Ok();
-    }   
+    }
+    
+    [Route("[action]")]
+    [HttpPost]
+    public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
+    {
+        var basket = await _basketRepositor.GetBasket(basketCheckout.UserName);
+        if (basket is null)
+        {
+            return BadRequest();
+        }
+
+        var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+        eventMessage.TotalPrice = basket.TotalPrice;
+        await _publishEndpoint.Publish(eventMessage);
+        
+        await _basketRepositor.DeleteBasket(basket.UserName);
+
+        return Accepted();
+    }
 }
